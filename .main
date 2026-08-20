@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Portfolio</title>
+  
+  <style>
+    /* --- CSS Variables & Design Tokens --- */
+    :root {
+      --bg-primary: #0a0c10;
+      --bg-card: rgba(22, 27, 34, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --accent-neon: #00ffcc;
+      --accent-glow: rgba(0, 255, 204, 0.25);
+      --accent-purple: #bd00ff;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* --- Navigation --- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+      color: var(--accent-neon);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--accent-neon);
+    }
+
+    /* --- Layout & Sections --- */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem 3rem;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--accent-neon);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    /* --- Hero Section --- */
+    .hero-greeting {
+      font-size: 1.25rem;
+      color: var(--accent-neon);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .typewriter-container {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .typed-text {
+      color: var(--text-main);
+      border-right: 2px solid var(--accent-neon);
+      animation: blink 0.75s step-end infinite;
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--accent-neon); }
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      width: fit-content;
+      border: 1px solid var(--accent-neon);
+      color: var(--accent-neon);
+      background: transparent;
+    }
+
+    .btn:hover {
+      background: var(--accent-neon);
+      color: var(--bg-primary);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* --- Projects & Grid Layout --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 255, 204, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-neon);
+      background: rgba(0, 255, 204, 0.08);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* --- Scroll Reveal Animations --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header>
+    <nav>
+      <a href="#home" class="logo">&lt;Dev /&gt;</a>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home">
+      <p class="hero-greeting">Hi, my name is</p>
+      <h1 class="hero-name">Alex Developer.</h1>
+      <div class="typewriter-container">
+        I am a <span class="typed-text"></span>
+      </div>
+      <a href="#projects" class="btn">View My Work</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="reveal">
+      <h2 class="section-title">About Me</h2>
+      <div class="card">
+        <p class="card-desc">
+          I build high-performance, accessible, and responsive digital experiences. Passionate about clean code, UI design, and optimizing web standard workflows without external dependencies.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="reveal">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <h3 class="card-title">Cloud Infrastructure Visualizer</h3>
+          <p class="card-desc">Real-time dynamic resource map for hybrid-cloud deployments.</p>
+          <ul class="tag-list">
+            <li class="tag">JavaScript</li>
+            <li class="tag">CSS Grid</li>
+            <li class="tag">SVG</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Markdown Doc Engine</h3>
+          <p class="card-desc">Lightweight client-side parsing tool for real-time technical documentation.</p>
+          <ul class="tag-list">
+            <li class="tag">Vanilla JS</li>
+            <li class="tag">RegEx</li>
+            <li class="tag">HTML5</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="reveal">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="card">
+        <p class="card-desc">I am always open to discussing new projects, design systems, and engineering opportunities.</p>
+        <a href="mailto:alex@example.com" class="btn">Say Hello</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Alex Developer. All rights reserved.</p>
+  </footer>
+
+  <!-- Vanilla JavaScript Logic -->
+  <script>
+    // --- 1. Typewriter Effect ---
+    const roles = ["Full-Stack Developer", "Creative Technologist", "Open Source Builder"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingElement = document.querySelector(".typed-text");
+
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      
+      if (isDeleting) {
+        typingElement.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingElement.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 40 : 100;
+
+      if (!isDeleting && charIndex === currentRole.length) {
+        typeSpeed = 1800; // Pause at full word
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        typeSpeed = 400; // Pause before typing next
+      }
+
+      setTimeout(typeEffect, typeSpeed);
+    }
+
+    // --- 2. Scroll Reveal Observer ---
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    // --- 3. Active Navbar Link Tracker ---
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const activeId = entry.target.getAttribute("id");
+          navLinks.forEach(link => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${activeId}`);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+
+    sections.forEach(sec => navObserver.observe(sec));
+
+    // --- 4. Dynamic Copyright Year ---
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Start typing loop
+    document.addEventListener("DOMContentLoaded", typeEffect);
+  </script>
+</body>
+</html>
