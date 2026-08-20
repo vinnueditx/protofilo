@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay | Portfolio</title>
+
+    <style>
+        /* =========================
+           BASIC RESET
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d0f18, #171a29, #2a1b3d);
+            color: #f8fafc;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* =========================
+           SCROLL ANIMATIONS
+        ========================= */
+        section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            padding: 100px 8%;
+        }
+
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13, 15, 24, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #00e5ff;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #00e5ff;
+        }
+
+        /* =========================
+           GENERAL HEADINGS
+        ========================= */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            color: #00e5ff;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+        }
+
+        /* =========================
+           HOME
+        ========================= */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 120px;
+        }
+
+        .home-content {
+            max-width: 800px;
+        }
+
+        .home-content h3 {
+            color: #94a3b8;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .home-content h1 {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .home-content h1 span {
+            color: #00e5ff;
+        }
+
+        .home-content h2 {
+            font-size: 28px;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .home-content h2::after {
+            content: "|";
+            color: #00e5ff;
+            margin-left: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .home-content p {
+            color: #94a3b8;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           BUTTONS & ICONS
+        ========================= */
+        .buttons {
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+            margin: 5px;
+            border-radius: 30px;
+            background: #00e5ff;
+            color: #0d0f18;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #00e5ff;
+            border: 2px solid #00e5ff;
+        }
+
+        .btn-outline:hover {
+            background: #00e5ff;
+            color: #0d0f18;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #3b4055;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #00e5ff;
+            color: #0d0f18;
+            transform: translateY(-5px);
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+        .about-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .about-image {
+            width: 240px;
+            height: 240px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            border: 5px solid #00e5ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 70px;
+            font-weight: bold;
+            color: #00e5ff;
+            background: #202334;
+        }
+
+        .about-text {
+            max-width: 650px;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           EDUCATION
+        ========================= */
+        .timeline {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .timeline-item {
+            background: #202334;
+            border-left: 4px solid #00e5ff;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+        }
+
+        .timeline-item h3 {
+            color: #00e5ff;
+        }
+
+        .timeline-item h4 {
+            margin: 5px 0;
+        }
+
+        .timeline-item p {
+            color: #94a3b8;
+        }
+
+        /* =========================
+           SKILLS
+        ========================= */
+        .skills-container {
+            max-width: 900px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .skill-box {
+            background: #202334;
+            padding: 25px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .skill-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-box h3 {
+            margin-bottom: 20px;
+            color: #00e5ff;
+        }
+
+        .skill {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: #3b4055;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: #00e5ff;
+            border-radius: 10px;
+        }
+
+        /* =========================
+           PROJECTS
+        ========================= */
+        .cards {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: #202334;
+            padding: 30px;
+            border-radius: 15px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #00e5ff;
+        }
+
+        .card h3 {
+            color: #00e5ff;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CONTACT & FOOTER
+        ========================= */
+        .contact-container {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+            background: #202334;
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        .contact-container p {
+            color: #94a3b8;
+            margin: 10px 0 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #0d0f18;
+            color: #94a3b8;
+        }
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+        @media (max-width: 768px) {
+            nav { padding: 18px 5%; }
+            nav ul { gap: 12px; }
+            nav ul li a { font-size: 13px; }
+            .home-content h1 { font-size: 42px; }
+            .home-content h2 { font-size: 22px; }
+            .about-container { flex-direction: column; text-align: center; }
+            .skills-container, .cards { grid-template-columns: 1fr; }
+            section { padding: 80px 5%; }
+            .section-title h2 { font-size: 32px; }
+        }
+
+        @media (max-width: 480px) {
+            nav ul { display: none; }
+            .home-content h1 { font-size: 34px; }
+            .about-image { width: 180px; height: 180px; font-size: 50px; }
+            .contact-container { padding: 25px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">Vinay</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home">
+        <div class="home-content">
+            <h3>Hello, I'm</h3>
+            <h1>Vinay <span>Inakonda</span></h1>
+            <h2></h2>
+            <p>
+                I am interested in Python, SQL, Web Development, and Data Analysis.
+                I enjoy building projects and continuously improving my programming skills.
+            </p>
+            <div class="buttons">
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+            <div class="social-icons">
+                <a href="#" title="GitHub">G</a>
+                <a href="#" title="LinkedIn">in</a>
+                <a href="mailto:vinayinakonda@gmail.com" title="Email">@</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-title">
+            <h2>About Me</h2>
+            <p>Get to know me</p>
+        </div>
+        <div class="about-container">
+            <div class="about-image">V</div>
+            <div class="about-text">
+                <h3>Python & Web Development Enthusiast</h3>
+                <p>I am a passionate learner and developer interested in building websites, Python applications, and data analysis projects.</p>
+                <p>I enjoy learning new technologies and applying my knowledge by creating practical solutions.</p>
+                <p>My current toolkit includes Python, SQL, HTML, CSS, Git, GitHub, and Data Analysis libraries.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <div class="section-title">
+            <h2>Education</h2>
+            <p>My educational journey</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Engineering / Degree</h3>
+                <h4>Electronics & Communication Engineering</h4>
+                <p>Currently developing foundational problem-solving abilities along with programming and web development skills.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Technical Learning</h3>
+                <h4>Python, SQL & Web Development</h4>
+                <p>Hands-on practice designing databases, building backend scripts, and styling frontend applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-title">
+            <h2>My Skills</h2>
+            <p>Technologies and tools I work with</p>
+        </div>
+        <div class="skills-container">
+            <!-- Programming & Backend -->
+            <div class="skill-box">
+                <h3>Programming & Database</h3>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>Python</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="progress"><span style="width: 80%;"></span></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>SQL / Databases</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="progress"><span style="width: 75%;"></span></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>Data Analysis (Pandas/NumPy)</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="progress"><span style="width: 70%;"></span></div>
+                </div>
+            </div>
+
+            <!-- Frontend & Tools -->
+            <div class="skill-box">
+                <h3>Web & Tools</h3>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>HTML5 & CSS3</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress"><span style="width: 85%;"></span></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>JavaScript (Basics)</span>
+                        <span>65%</span>
+                    </div>
+                    <div class="progress"><span style="width: 65%;"></span></div>
+                </div>
+                <div class="skill">
+                    <div class="skill-name">
+                        <span>Git & GitHub</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="progress"><span style="width: 75%;"></span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="section-title">
+            <h2>Featured Projects</h2>
+            <p>Recent work and builds</p>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <div>
+                    <h3>Data Analysis Dashboard</h3>
+                    <p>Automated data pipeline and visualization setup using Python, Pandas, and exploratory data analysis methods.</p>
+                </div>
+                <a href="#" class="btn btn-outline">Source Code</a>
+            </div>
+            <div class="card">
+                <div>
+                    <h3>SQL Database Manager</h3>
+                    <p>Relational database project with complex queries, schema normalization, and data manipulation scripts.</p>
+                </div>
+                <a href="#" class="btn btn-outline">Source Code</a>
+            </div>
+            <div class="card">
+                <div>
+                    <h3>Personal Portfolio</h3>
+                    <p>Responsive, interactive developer portfolio website built with modern HTML5, CSS3, and vanilla JavaScript.</p>
+                </div>
+                <a href="#" class="btn btn-outline">Live Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Contact Me</h2>
+            <p>Get in touch</p>
+        </div>
+        <div class="contact-container">
+            <h3>Let's Collaborate</h3>
+            <p>Feel free to reach out for project inquiries, collaboration, or open developer roles.</p>
+            <a href="mailto:vinayinakonda@gmail.com" class="btn">Send an Email</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Vinay | All Rights Reserved</p>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        /* Typing Animation */
+        const roles = ["Python Developer", "Web Developer", "Data Analyst"];
+        const typingText = document.querySelector(".home-content h2");
+        let roleIndex = 0, charIndex = 0, deleting = false;
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            if (!deleting) {
+                typingText.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentRole.length) {
+                    deleting = true;
+                    setTimeout(typeEffect, 1500);
+                    return;
+                }
+            } else {
+                typingText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    deleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                }
+            }
+            setTimeout(typeEffect, deleting ? 60 : 100);
+        }
+        typeEffect();
+
+        /* Scroll Reveal */
+        const sections = document.querySelectorAll("section");
+        const revealOnScroll = () => {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight - 100) {
+                    section.classList.add("show");
+                }
+            });
+        };
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        /* Active Navigation & Smooth Scroll */
+        const navLinks = document.querySelectorAll("nav ul li a");
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === "#" + current) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        /* Dynamic Year */
+        const footerText = document.querySelector("footer p");
+        if (footerText) {
+            footerText.innerHTML = `© ${new Date().getFullYear()} Vinay | All Rights Reserved`;
+        }
+    </script>
+</body>
+</html>
