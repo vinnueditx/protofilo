@@ -10,7 +10,8 @@ A clean, responsive, and modern developer portfolio built using pure **HTML5**, 
 
 ## 🚀 Live Demo
 
-- **Live URL:** [https://<YOUR-GITHUB-USERNAME>.github.io/portfolio/](https://<YOUR-GITHUB-USERNAME>.github.io/portfolio/)
+- **Live URL:** 
+https://github.com/vinnueditx/protofilo
 
 ---
 
